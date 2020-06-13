@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./qrcode.min.js"></script>
+</head>
+<body>
+  <div>微信id加好友，仅限安卓</div>
+  <div>(如没有安卓机，可用pc下载各种安卓模拟器打开微信，这个自行百度把，就不教了)</div>
+  <div>
+    输入id：<input id="input" /><button onclick="generate()">生成二维码</button>
+  </div>
+  <div>(可直接输入“wxid_”后的字符)</div>
+  <div id="main"></div>
+  <div>最后祝有情人终成眷属</div>
+  <script>
+    const host = 'weixin://contacts/profile/'
+    let id = ''
+    const qrcode = new QRCode(document.getElementById("main"), {
+      width : 200,
+      height : 200
+    })
+    const generate = () => {
+      const input = document.getElementById('input')
+      id = input.value
+      if (id.indexOf('wxid_') < 0 && id.indexOf('wxid') < 0) id = 'wxid_' + id
+      const url = host + id
+      console.log(url)
+      qrcode.makeCode(url)
+    }
+  </script>
+</body>
+</html>
